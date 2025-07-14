@@ -13,7 +13,8 @@ public class ExtraLayers {
 
   public static List<Layer> create(Translations translations, PlanetilerConfig config, Stats stats) {
     return List.of(
-      new Seamarks(translations, config, stats)
+      new Seamarks(translations, config, stats),
+      new BeaconBuoy(translations, config, stats)
     // Create classes that extend Layer interface in the addons package, then instantiate them here
     );
   }
