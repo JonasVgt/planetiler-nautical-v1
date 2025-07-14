@@ -70,10 +70,16 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
           .setAttr("subclass", subclass)
           .setAttr("shape", feature.getTag("seamark:" + clazz + ":shape"))
           .setAttr("pattern", pattern)
-          .setAttr("topmark_shape", feature.getTag("seamark:topmark:shape"))
+          .setAttr("topmark_shape", parse_topmark_shape(feature.getString("seamark:topmark:shape")))
           .setAttr("topmark_pattern", topmark_pattern);
     }
 
+  }
+
+  private String parse_topmark_shape(String tag) {
+    if(tag == null) return null;
+
+    return tag.replace(' ', '_');
   }
 
   private String parse_pattern(String colour, String pattern) {
