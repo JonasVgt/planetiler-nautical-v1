@@ -18,17 +18,17 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
   private final Translations translations;
 
   private final Set<String> SUPPORTED_CLASSES = Set.of(
-    "beacon_cardinal",
-    "beacon_isolated_danger",
-    "beacon_lateral",
-    "beacon_safe_water",
-    "beacon_special_purpose",
-    "buoy_cardinal",
-    "buoy_installation",
-    "buoy_isolated_danger",
-    "buoy_lateral",
-    "buoy_safe_water",
-    "buoy_special_purpose");
+      "beacon_cardinal",
+      "beacon_isolated_danger",
+      "beacon_lateral",
+      "beacon_safe_water",
+      "beacon_special_purpose",
+      "buoy_cardinal",
+      "buoy_installation",
+      "buoy_isolated_danger",
+      "buoy_lateral",
+      "buoy_safe_water",
+      "buoy_special_purpose");
 
   BeaconBuoy(Translations translations, PlanetilerConfig config, Stats stats) {
     this.translations = translations;
@@ -56,24 +56,33 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
       subclass = feature.getTag("seamark:" + clazz + ":category");
     }
 
+    String pattern = parse_pattern(feature.getString("seamark:" + clazz + ":colour"),
+        feature.getString("seamark:" + clazz + ":colour_pattern"));
+
+    String topmark_pattern = parse_pattern(feature.getString("seamark:topmark:colour"),
+        feature.getString("seamark:topmark:colour_pattern"));
+
     if (feature.isPoint()) {
       features.point("beacon_buoy")
-        .setMinZoom(6)
-        .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
-        .setAttr("class", clazz)
-        .setAttr("subclass", subclass)
-        .setAttr("shape", feature.getTag("seamark:" + clazz + ":shape"))
-        .setAttr("colour", parse_colour(feature.getTag("seamark:" + clazz + ":colour")))
-        .setAttr("colour_pattern", feature.getTag("seamark:" + clazz + ":colour_pattern"))
-        .setAttr("topmark_shape", feature.getTag("seamark:topmark:shape"))
-        .setAttr("topmark_colour", parse_colour(feature.getTag("seamark:topmark:colour")));
-      }
+          .setMinZoom(6)
+          .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
+          .setAttr("class", clazz)
+          .setAttr("subclass", subclass)
+          .setAttr("shape", feature.getTag("seamark:" + clazz + ":shape"))
+          .setAttr("pattern", pattern)
+          .setAttr("topmark_shape", feature.getTag("seamark:topmark:shape"))
+          .setAttr("topmark_pattern", topmark_pattern);
+    }
 
   }
 
-  private Object parse_colour(Object tag){
-    String str = Parse.parseStringOrNull(tag);
-    if(str == null) return null;
-    return str.replace(";", "_");
+  private String parse_pattern(String colour, String pattern) {
+    if (colour == null)
+      return null;
+
+    if (pattern == null)
+      return colour.replace(";", "_");
+
+    return pattern + "/" + colour.replace(";", "_");
   }
 }
