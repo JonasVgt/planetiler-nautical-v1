@@ -30,7 +30,7 @@ public class Bridge implements Layer, OpenMapTilesProfile.OsmAllProcessor {
       clerance_height = feature.getString("seamark:bridge:clearance_height_closed");
     String clerance_width = feature.getString("seamark:bridge:clearance_width");
 
-    features.point("seamark_bridge")
+    features.anyGeometry("seamark_bridge")
       .setMinZoom(14)
       .setAttr("class", clazz)
       .setAttr("clearance_height", clerance_height)

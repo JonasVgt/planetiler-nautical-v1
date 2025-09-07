@@ -42,13 +42,11 @@ public class Seamarks implements Layer, OpenMapTilesProfile.OsmAllProcessor {
       subclass = "rock_" + feature.getTag("seamark:rock:water_level");
     }
 
-    if (feature.isPoint()) {
-      features.point("seamarks")
-          .setMinZoom(6)
-          .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
-          .setAttr("class", clazz)
-          .setAttr("subclass", subclass);
-    }
+    features.anyGeometry("seamarks")
+        .setMinZoom(6)
+        .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
+        .setAttr("class", clazz)
+        .setAttr("subclass", subclass);
 
   }
 }
