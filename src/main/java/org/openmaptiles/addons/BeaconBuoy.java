@@ -62,6 +62,7 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
           .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
           .setAttr("class", clazz)
           .setAttr("subclass", subclass)
+          .setAttr("buoy", clazz.startsWith("buoy"))
           .setAttr("shape", get_shape(feature, clazz, subclass))
           .setAttr("pattern", get_pattern(feature, clazz, subclass))
           .setAttr("topmark_shape", get_topmark_shape(feature, clazz, subclass))
