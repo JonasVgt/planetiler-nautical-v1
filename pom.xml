@@ -12,19 +12,19 @@
     <planetiler.version>0.10.2</planetiler.version>
     <junit.version>6.1.0</junit.version>
 
-    <mainClass>org.openmaptiles.OpenMapTilesMain</mainClass>
+    <mainClass>org.nauticaltiles.NauticalTilesMain</mainClass>
     <image.version>${project.version}</image.version>
-    <image>openmaptiles/planetiler-openmaptiles:${image.version}</image>
+    <image>jonasvgt/planetiler-openmaptiles:${image.version}</image>
     <assembly-phase>package</assembly-phase>
     <jib.platform-arch>amd64</jib.platform-arch>
     <jib.platform-os>linux</jib.platform-os>
   </properties>
 
-  <groupId>org.openmaptiles</groupId>
-  <artifactId>planetiler-openmaptiles</artifactId>
-  <version>3.16.1-SNAPSHOT</version>
+  <groupId>org.nauticaltiles</groupId>
+  <artifactId>planetiler-nauticaltiles</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 
-  <name>OpenMapTiles Vector Tile Schema implementation for Planetiler tool</name>
+  <name>Nautical Vector Tile Schema implementation for Planetiler tool</name>
 
   <repositories>
     <!-- Planetiler depends on geotools for shapefile processing, which is not in maven central. Add here: -->
@@ -95,8 +95,8 @@
   </dependencies>
 
   <scm>
-    <connection>scm:git:https://github.com/openmaptiles/planetiler-openmaptiles.git</connection>
-    <url>https://github.com/openmaptiles/planetiler-openmaptiles</url>
+    <connection>scm:git:https://github.com/JonasVgt/planetiler-nautical.git</connection>
+    <url>https://github.com/JonasVgt/planetiler-nautical</url>
   </scm>
 
   <build>
@@ -248,7 +248,7 @@
           <container>
             <labels>
               <org.opencontainers.image.source>
-                https://github.com/openmaptiles/planetiler-openmaptiles
+                https://github.com/JonasVgt/planetiler-nautical
               </org.opencontainers.image.source>
             </labels>
             <mainClass>${mainClass}</mainClass>
