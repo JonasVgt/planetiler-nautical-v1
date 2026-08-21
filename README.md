@@ -163,9 +163,12 @@ If you want to regenerate from a different repository than the default openmapti
 ```
 
 ## License
+This project is derived from OpenMapTiles' Planetiler profile.
 
-All code in this repository is under the [BSD license](./LICENSE.md) and the cartography decisions encoded in the schema
+OpenMapTiles-derived code in this repository is under the [BSD license](./LICENSE.md) and the OpenMapTiles cartography decisions encoded in the schema
 and SQL are licensed under [CC-BY](./LICENSE.md).
+
+Modifications and additional layers in this project are Copyright Jonas Voigt.
 
 Products or services using maps derived from OpenMapTiles schema need to **visibly credit "OpenMapTiles.org"** or
 **reference "OpenMapTiles"** with a link to https://openmaptiles.org/. Exceptions to attribution requirement can be granted
