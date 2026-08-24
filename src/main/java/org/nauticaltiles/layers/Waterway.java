@@ -55,7 +55,6 @@ import com.onthegomap.planetiler.util.Translations;
 import com.onthegomap.planetiler.util.ZoomFunction;
 import java.util.List;
 import java.util.Map;
-
 import org.nauticaltiles.OpenMapTilesProfile;
 import org.nauticaltiles.generated.NauticalTilesSchema;
 import org.nauticaltiles.generated.Tables;

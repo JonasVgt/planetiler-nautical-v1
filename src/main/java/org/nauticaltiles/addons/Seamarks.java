@@ -1,22 +1,21 @@
 package org.nauticaltiles.addons;
 
-import org.nauticaltiles.Layer;
-import org.nauticaltiles.OpenMapTilesProfile;
-import org.nauticaltiles.util.OmtLanguageUtils;
-
 import com.onthegomap.planetiler.FeatureCollector;
 import com.onthegomap.planetiler.config.PlanetilerConfig;
 import com.onthegomap.planetiler.reader.SourceFeature;
 import com.onthegomap.planetiler.stats.Stats;
 import com.onthegomap.planetiler.util.Translations;
+import org.nauticaltiles.Layer;
+import org.nauticaltiles.OpenMapTilesProfile;
+import org.nauticaltiles.util.OmtLanguageUtils;
 
 public class Seamarks implements Layer, OpenMapTilesProfile.OsmAllProcessor {
 
   private static final String LAYER_NAME = "seamarks";
-  
+
   private final Translations translations;
 
-  Seamarks( Translations translations, PlanetilerConfig config, Stats stats) {
+  Seamarks(Translations translations, PlanetilerConfig config, Stats stats) {
     this.translations = translations;
   }
 
@@ -32,22 +31,21 @@ public class Seamarks implements Layer, OpenMapTilesProfile.OsmAllProcessor {
 
     Object clazz = feature.getTag("seamark:type");
     Object subclass = clazz;
-    
+
     if (feature.hasTag("seamark:" + clazz + ":category")) {
       subclass = feature.getTag("seamark:" + clazz + ":category");
     }
 
 
-    if (feature.hasTag("seamark:type", "rock") && feature.hasTag("seamark:rock:water_level") ) {
+    if (feature.hasTag("seamark:type", "rock") && feature.hasTag("seamark:rock:water_level")) {
       subclass = "rock_" + feature.getTag("seamark:rock:water_level");
     }
 
     features.anyGeometry("seamarks")
-        .setMinZoom(6)
-        .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
-        .setAttr("class", clazz)
-        .setAttr("subclass", subclass);
+      .setMinZoom(6)
+      .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
+      .setAttr("class", clazz)
+      .setAttr("subclass", subclass);
 
   }
 }
-

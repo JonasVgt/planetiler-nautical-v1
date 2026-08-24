@@ -1,13 +1,12 @@
 package org.nauticaltiles.addons;
 
-import org.nauticaltiles.Layer;
-import org.nauticaltiles.OpenMapTilesProfile;
-
 import com.onthegomap.planetiler.FeatureCollector;
 import com.onthegomap.planetiler.config.PlanetilerConfig;
 import com.onthegomap.planetiler.reader.SourceFeature;
 import com.onthegomap.planetiler.stats.Stats;
 import com.onthegomap.planetiler.util.Translations;
+import org.nauticaltiles.Layer;
+import org.nauticaltiles.OpenMapTilesProfile;
 
 public class Bridge implements Layer, OpenMapTilesProfile.OsmAllProcessor {
 
@@ -27,7 +26,7 @@ public class Bridge implements Layer, OpenMapTilesProfile.OsmAllProcessor {
 
     String clazz = feature.getString("seamark:bridge:category");
     String clerance_height = feature.getString("seamark:bridge:clearance_height");
-    if(clerance_height == null)
+    if (clerance_height == null)
       clerance_height = feature.getString("seamark:bridge:clearance_height_closed");
     String clerance_width = feature.getString("seamark:bridge:clearance_width");
 

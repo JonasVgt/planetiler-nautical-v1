@@ -62,7 +62,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-
 import org.nauticaltiles.OpenMapTilesProfile;
 import org.nauticaltiles.generated.NauticalTilesSchema;
 import org.nauticaltiles.generated.Tables;

@@ -19,17 +19,17 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
   private final Translations translations;
 
   private final Set<String> SUPPORTED_CLASSES = Set.of(
-      "beacon_cardinal",
-      "beacon_isolated_danger",
-      "beacon_lateral",
-      "beacon_safe_water",
-      "beacon_special_purpose",
-      "buoy_cardinal",
-      "buoy_installation",
-      "buoy_isolated_danger",
-      "buoy_lateral",
-      "buoy_safe_water",
-      "buoy_special_purpose");
+    "beacon_cardinal",
+    "beacon_isolated_danger",
+    "beacon_lateral",
+    "beacon_safe_water",
+    "beacon_special_purpose",
+    "buoy_cardinal",
+    "buoy_installation",
+    "buoy_isolated_danger",
+    "buoy_lateral",
+    "buoy_safe_water",
+    "buoy_special_purpose");
 
   BeaconBuoy(Translations translations, PlanetilerConfig config, Stats stats) {
     this.translations = translations;
@@ -59,15 +59,15 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
 
     if (feature.isPoint()) {
       features.point("beacon_buoy")
-          .setMinZoom(6)
-          .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
-          .setAttr("class", clazz)
-          .setAttr("subclass", subclass)
-          .setAttr("buoy", clazz.startsWith("buoy"))
-          .setAttr("shape", get_shape(feature, clazz, subclass))
-          .setAttr("pattern", get_pattern(feature, clazz, subclass))
-          .setAttr("topmark_shape", get_topmark_shape(feature, clazz, subclass))
-          .setAttr("topmark_pattern", get_topmark_pattern(feature, clazz, subclass));
+        .setMinZoom(6)
+        .putAttrs(OmtLanguageUtils.getNames(feature.tags(), translations))
+        .setAttr("class", clazz)
+        .setAttr("subclass", subclass)
+        .setAttr("buoy", clazz.startsWith("buoy"))
+        .setAttr("shape", get_shape(feature, clazz, subclass))
+        .setAttr("pattern", get_pattern(feature, clazz, subclass))
+        .setAttr("topmark_shape", get_topmark_shape(feature, clazz, subclass))
+        .setAttr("topmark_pattern", get_topmark_pattern(feature, clazz, subclass));
     }
 
   }
@@ -133,7 +133,7 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
   private String get_pattern(SourceFeature feature, String clazz, String subclass) {
 
     String pattern = parse_pattern(feature.getString("seamark:" + clazz + ":colour"),
-        feature.getString("seamark:" + clazz + ":colour_pattern"));
+      feature.getString("seamark:" + clazz + ":colour_pattern"));
     if (pattern != null)
       return pattern;
 
@@ -243,7 +243,7 @@ public class BeaconBuoy implements Layer, OpenMapTilesProfile.OsmAllProcessor {
 
   private String get_topmark_pattern(SourceFeature feature, String clazz, String subclass) {
     String topmark_pattern = parse_pattern(feature.getString("seamark:topmark:colour"),
-        feature.getString("seamark:topmark:colour_pattern"));
+      feature.getString("seamark:topmark:colour_pattern"));
     if (topmark_pattern != null)
       return topmark_pattern;
 

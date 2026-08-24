@@ -10,7 +10,6 @@ import com.onthegomap.planetiler.util.Translations;
 import com.onthegomap.planetiler.util.Wikidata;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.nauticaltiles.OpenMapTilesProfile;
 
 class OpenMapTilesProfileTest {
 

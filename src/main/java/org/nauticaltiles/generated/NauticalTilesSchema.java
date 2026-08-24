@@ -45,7 +45,6 @@ import com.onthegomap.planetiler.stats.Stats;
 import com.onthegomap.planetiler.util.Translations;
 import java.util.List;
 import java.util.Set;
-
 import org.nauticaltiles.Layer;
 
 /**
