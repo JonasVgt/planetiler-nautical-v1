@@ -8,7 +8,7 @@ set -o nounset
 TAG="${1:-"master"}"
 echo "tag=${TAG}"
 
-BASE_URL="${2:-"https://raw.githubusercontent.com/openmaptiles/openmaptiles/"}"
+BASE_URL="${2:-"https://raw.githubusercontent.com/JonasVgt/nautical-maplibre/"}"
 echo "base-url=${BASE_URL}"
 
 echo "Building..."

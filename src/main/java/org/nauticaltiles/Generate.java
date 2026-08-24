@@ -61,6 +61,7 @@ public class Generate {
   private static final String LINE_SEPARATOR = System.lineSeparator();
   private static final String GENERATED_FILE_HEADER = """
     /*
+    Copyright (c) 2026, Jonas Voigt.
     Copyright (c) 2024, MapTiler.com & OpenMapTiles contributors.
     All rights reserved.
 
@@ -133,15 +134,15 @@ public class Generate {
   public static void main(String[] args) throws IOException {
     Arguments arguments = Arguments.fromArgsOrConfigFile(args);
     PlanetilerConfig planetilerConfig = PlanetilerConfig.from(arguments);
-    String tag = arguments.getString("tag", "openmaptiles tag to use", "v3.16");
-    String baseUrl = arguments.getString("base-url", "the url used to download the openmaptiles.yml",
-      "https://raw.githubusercontent.com/openmaptiles/openmaptiles/");
+    String tag = arguments.getString("tag", "tag to use", "v0.1.0");
+    String baseUrl = arguments.getString("base-url", "the url used to download the nautical-tiles.yml",
+      "https://raw.githubusercontent.com/JonasVgt/nautical-maplibre/");
     String base = baseUrl + tag + "/";
 
     // start crawling from openmaptiles.yaml
     // then crawl schema from each layers/<layer>/<layer>.yaml file that it references
     // then crawl table definitions from each layers/<layer>/mapping.yaml file that the layer references
-    String rootUrl = base + "openmaptiles.yaml";
+    String rootUrl = base + "nautical-tiles.yaml";
     OpenmaptilesConfig config = loadAndParseYaml(rootUrl, planetilerConfig, OpenmaptilesConfig.class);
 
     List<LayerConfig> layers = new ArrayList<>();
