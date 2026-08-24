@@ -1,4 +1,5 @@
 /*
+Copyright (c) 2026, Jonas Voigt.
 Copyright (c) 2024, MapTiler.com & OpenMapTiles contributors.
 All rights reserved.
 
@@ -49,14 +50,14 @@ import org.nauticaltiles.Layer;
 
 /**
  * All vector tile layer definitions, attributes, and allowed values generated from the
- * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/openmaptiles.yaml">OpenMapTiles vector tile schema
- * master</a>.
+ * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/nautical-tiles.yaml">NauticalTiles vector tile
+ * schema v0.1.0</a>.
  */
 @SuppressWarnings("unused")
 public class NauticalTilesSchema {
-  public static final String NAME = "OpenMapTiles";
-  public static final String DESCRIPTION = "A tileset showcasing all layers in OpenMapTiles. https://openmaptiles.org";
-  public static final String VERSION = "3.16.0";
+  public static final String NAME = "NauticalTiles";
+  public static final String DESCRIPTION = "A tileset showcasing all layers in NauticalTiles.";
+  public static final String VERSION = "0.1.0";
   public static final String ATTRIBUTION =
     "<a href=\"https://www.openmaptiles.org/\" target=\"_blank\">&copy; OpenMapTiles</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
   public static final List<String> LANGUAGES = List.of("af", "am", "ar", "az", "be", "bg", "bn", "br", "bs", "ca", "co",
@@ -96,7 +97,7 @@ public class NauticalTilesSchema {
    * boundaries show up. So you might not be able to use border styling for ocean water features.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/water/water.yaml">water.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/water/water.yaml">water.yaml</a>
    */
   public interface Water extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -195,7 +196,7 @@ public class NauticalTilesSchema {
    * field applied. Waterways do not have a <code>subclass</code> field.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/waterway/waterway.yaml">waterway.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/waterway/waterway.yaml">waterway.yaml</a>
    */
   public interface Waterway extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -287,7 +288,7 @@ public class NauticalTilesSchema {
    * layer is to style wood (<code>class=wood</code>) and grass (<code>class=grass</code>) areas.
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/landcover/landcover.yaml">landcover.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/landcover/landcover.yaml">landcover.yaml</a>
    */
   public interface Landcover extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -446,7 +447,7 @@ public class NauticalTilesSchema {
    * residential (urban) areas and at higher zoom levels mostly OSM <code>landuse</code> tags.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/landuse/landuse.yaml">landuse.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/landuse/landuse.yaml">landuse.yaml</a>
    */
   public interface Landuse extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -496,9 +497,27 @@ public class NauticalTilesSchema {
        * <li>"neighbourhood"
        * <li>"dam"
        * <li>"quarry"
+       * <li>"parking"
        * </ul>
        */
       public static final String CLASS = "class";
+      /**
+       * Original value of the <a href="http://wiki.openstreetmap.org/wiki/Key:parking"><code>parking</code></a> tag.
+       * Use this to do more precise styling.
+       */
+      public static final String SUBCLASS = "subclass";
+
+      /**
+       * Access restrictions. Supported values of the
+       * <a href="http://wiki.openstreetmap.org/wiki/Key:access"><code>access</code></a> tag are <code>no</code> and
+       * <code>private</code>, which resolve to <code>no</code>.
+       * <p>
+       * allowed values:
+       * <ul>
+       * <li>false
+       * </ul>
+       */
+      public static final String ACCESS = "access";
     }
     /** Attribute values for map elements in the landuse layer. */
     final class FieldValues {
@@ -528,10 +547,11 @@ public class NauticalTilesSchema {
       public static final String CLASS_NEIGHBOURHOOD = "neighbourhood";
       public static final String CLASS_DAM = "dam";
       public static final String CLASS_QUARRY = "quarry";
+      public static final String CLASS_PARKING = "parking";
       public static final Set<String> CLASS_VALUES =
         Set.of("railway", "cemetery", "military", "residential", "commercial", "industrial", "garages", "retail",
           "bus_station", "school", "university", "kindergarten", "college", "library", "hospital", "stadium", "pitch",
-          "playground", "track", "theme_park", "zoo", "suburb", "quarter", "neighbourhood", "dam", "quarry");
+          "playground", "track", "theme_park", "zoo", "suburb", "quarter", "neighbourhood", "dam", "quarry", "parking");
     }
     /** Complex mappings to generate attribute values from OSM element tags in the landuse layer. */
     final class FieldMappings {
@@ -542,7 +562,7 @@ public class NauticalTilesSchema {
    * <a href="http://wiki.openstreetmap.org/wiki/Tag:natural%3Dpeak">Natural peaks</a>
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/mountain_peak/mountain_peak.yaml">mountain_peak.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/mountain_peak/mountain_peak.yaml">mountain_peak.yaml</a>
    */
   public interface MountainPeak extends Layer {
     double BUFFER_SIZE = 64.0;
@@ -627,7 +647,7 @@ public class NauticalTilesSchema {
    * or select values of <a href="http://wiki.openstreetmap.org/wiki/Key:historic"><code>historic= </code></a>.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/park/park.yaml">park.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/park/park.yaml">park.yaml</a>
    */
   public interface Park extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -692,7 +712,7 @@ public class NauticalTilesSchema {
    * but for most styles it makes sense to just style <code>admin_level=2</code> and <code>admin_level=4</code>.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/boundary/boundary.yaml">boundary.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/boundary/boundary.yaml">boundary.yaml</a>
    */
   public interface Boundary extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -802,7 +822,7 @@ public class NauticalTilesSchema {
    * in the <strong>aeroway</strong> layer.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/aeroway/aeroway.yaml">aeroway.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/aeroway/aeroway.yaml">aeroway.yaml</a>
    */
   public interface Aeroway extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -862,7 +882,7 @@ public class NauticalTilesSchema {
    * features like plazas.
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/transportation/transportation.yaml">transportation.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/transportation/transportation.yaml">transportation.yaml</a>
    */
   public interface Transportation extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -1092,7 +1112,7 @@ public class NauticalTilesSchema {
        * groups <code>paved</code> (paved, asphalt, cobblestone, concrete, concrete:lanes, concrete:plates, metal,
        * paving_stones, sett, unhewn_cobblestone, wood) and <code>unpaved</code> (unpaved, compacted, dirt, earth,
        * fine_gravel, grass, grass_paver, gravel, gravel_turf, ground, ice, mud, pebblestone, salt, sand, snow,
-       * woodchips).
+       * woodchips, rock, clay, laterite).
        * <p>
        * allowed values:
        * <ul>
@@ -1218,7 +1238,7 @@ public class NauticalTilesSchema {
    * location:underground are excluded.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/building/building.yaml">building.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/building/building.yaml">building.yaml</a>
    */
   public interface Building extends Layer {
     double BUFFER_SIZE = 4.0;
@@ -1260,7 +1280,7 @@ public class NauticalTilesSchema {
    * from OSM water bodies. Only the most important lakes contain labels.
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/water_name/water_name.yaml">water_name.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/water_name/water_name.yaml">water_name.yaml</a>
    */
   public interface WaterName extends Layer {
     double BUFFER_SIZE = 256.0;
@@ -1337,7 +1357,7 @@ public class NauticalTilesSchema {
    * while for other roads you should use <code>name</code>.
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/transportation_name/transportation_name.yaml">transportation_name.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/transportation_name/transportation_name.yaml">transportation_name.yaml</a>
    */
   public interface TransportationName extends Layer {
     double BUFFER_SIZE = 8.0;
@@ -1609,7 +1629,7 @@ public class NauticalTilesSchema {
    * create a text hierarchy.
    *
    * Generated from
-   * <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/place/place.yaml">place.yaml</a>
+   * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/place/place.yaml">place.yaml</a>
    */
   public interface Place extends Layer {
     double BUFFER_SIZE = 256.0;
@@ -1733,7 +1753,7 @@ public class NauticalTilesSchema {
    * tag are prioritized for preservation).
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/housenumber/housenumber.yaml">housenumber.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/housenumber/housenumber.yaml">housenumber.yaml</a>
    */
   public interface Housenumber extends Layer {
     double BUFFER_SIZE = 8.0;
@@ -1765,7 +1785,7 @@ public class NauticalTilesSchema {
    * <a href="http://wiki.openstreetmap.org/wiki/Points_of_interest">Points of interests</a> containing a of a variety
    * of OpenStreetMap tags. Mostly contains amenities, sport, shop and tourist POIs.
    *
-   * Generated from <a href="https://github.com/openmaptiles/openmaptiles/blob/master/layers/poi/poi.yaml">poi.yaml</a>
+   * Generated from <a href="https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/poi/poi.yaml">poi.yaml</a>
    */
   public interface Poi extends Layer {
     double BUFFER_SIZE = 64.0;
@@ -1950,12 +1970,12 @@ public class NauticalTilesSchema {
         MultiExpression.entry("shop",
           matchAny("subclass", "accessories", "antiques", "beauty", "bed", "boutique", "camera", "carpet", "charity",
             "chemist", "chocolate", "coffee", "computer", "convenience", "confectionery", "copyshop", "cosmetics",
-            "garden_centre", "doityourself", "erotic", "electronics", "fabric", "florist", "frozen_food", "furniture",
-            "video_games", "video", "general", "gift", "hardware", "hearing_aids", "hifi", "interior_decoration",
-            "jewelry", "kiosk", "locksmith", "lamps", "mall", "massage", "motorcycle", "mobile_phone", "newsagent",
-            "optician", "outdoor", "paint", "perfumery", "perfume", "pet", "photo", "second_hand", "shoes", "sports",
-            "stationery", "tailor", "tattoo", "ticket", "tobacco", "toys", "travel_agency", "watches", "weapons",
-            "wholesale")),
+            "garden_centre", "doityourself", "erotic", "electronics", "fabric", "farm", "florist", "frozen_food",
+            "furniture", "video_games", "video", "general", "gift", "hardware", "hearing_aids", "hifi",
+            "interior_decoration", "jewelry", "kiosk", "locksmith", "lamps", "mall", "massage", "motorcycle",
+            "mobile_phone", "newsagent", "optician", "outdoor", "paint", "perfumery", "perfume", "pet", "photo",
+            "second_hand", "shoes", "sports", "stationery", "tailor", "tattoo", "ticket", "tobacco", "toys",
+            "travel_agency", "watches", "weapons", "wholesale")),
         MultiExpression.entry("office",
           matchAny("subclass", "accountant", "advertising_agency", "architect", "association", "bail_bond_agent",
             "charity", "company", "construction_company", "consulting", "cooperative", "courier", "coworking",
@@ -2015,7 +2035,7 @@ public class NauticalTilesSchema {
    * <a href="http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Daerodrome">Aerodrome labels</a>
    *
    * Generated from <a href=
-   * "https://github.com/openmaptiles/openmaptiles/blob/master/layers/aerodrome_label/aerodrome_label.yaml">aerodrome_label.yaml</a>
+   * "https://github.com/JonasVgt/nautical-maplibre/blob/v0.1.0/layers/aerodrome_label/aerodrome_label.yaml">aerodrome_label.yaml</a>
    */
   public interface AerodromeLabel extends Layer {
     double BUFFER_SIZE = 64.0;

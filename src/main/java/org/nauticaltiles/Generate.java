@@ -139,11 +139,11 @@ public class Generate {
       "https://raw.githubusercontent.com/JonasVgt/nautical-maplibre/");
     String base = baseUrl + tag + "/";
 
-    // start crawling from openmaptiles.yaml
+    // start crawling from nautical-tiles.yaml
     // then crawl schema from each layers/<layer>/<layer>.yaml file that it references
     // then crawl table definitions from each layers/<layer>/mapping.yaml file that the layer references
     String rootUrl = base + "nautical-tiles.yaml";
-    OpenmaptilesConfig config = loadAndParseYaml(rootUrl, planetilerConfig, OpenmaptilesConfig.class);
+    NauticaltilesConfig config = loadAndParseYaml(rootUrl, planetilerConfig, NauticaltilesConfig.class);
 
     List<LayerConfig> layers = new ArrayList<>();
     Set<String> imposm3MappingFiles = new LinkedHashSet<>();
@@ -167,7 +167,7 @@ public class Generate {
       tables.putAll(layer.tables);
     }
 
-    String packageName = "org.openmaptiles.generated";
+    String packageName = "org.nauticaltiles.generated";
     String[] packageParts = packageName.split("\\.");
     Path output = Path.of("src", "main", "java")
       .resolve(Path.of(packageParts[0], Arrays.copyOfRange(packageParts, 1, packageParts.length)));
@@ -180,8 +180,9 @@ public class Generate {
     LOGGER.info("Done!");
   }
 
-  /** Generates {@code OpenMapTilesSchema.java} */
-  private static void emitLayerSchemaDefinitions(OpenmaptilesTileSet info, List<LayerConfig> layers, String packageName,
+  /** Generates {@code NauticalTilesSchema.java} */
+  private static void emitLayerSchemaDefinitions(NauticaltilesTileSet info, List<LayerConfig> layers,
+    String packageName,
     Path output, String tag)
     throws IOException {
     StringBuilder schemaClass = new StringBuilder();
@@ -194,7 +195,7 @@ public class Generate {
         import com.onthegomap.planetiler.config.PlanetilerConfig;
         import com.onthegomap.planetiler.stats.Stats;
         import com.onthegomap.planetiler.expression.MultiExpression;
-        import org.openmaptiles.Layer;
+        import org.nauticaltiles.Layer;
         import com.onthegomap.planetiler.util.Translations;
         import java.util.List;
         import java.util.Map;
@@ -202,10 +203,10 @@ public class Generate {
 
         /**
          * All vector tile layer definitions, attributes, and allowed values generated from the
-         * <a href="https://github.com/openmaptiles/openmaptiles/blob/%s/openmaptiles.yaml">OpenMapTiles vector tile schema %s</a>.
+         * <a href="https://github.com/JonasVgt/nautical-maplibre/blob/%s/nautical-tiles.yaml">NauticalTiles vector tile schema %s</a>.
          */
         @SuppressWarnings("unused")
-        public class OpenMapTilesSchema {
+        public class NauticalTilesSchema {
           public static final String NAME = %s;
           public static final String DESCRIPTION = %s;
           public static final String VERSION = %s;
@@ -231,7 +232,7 @@ public class Generate {
           info.languages.stream().map(Format::quote).collect(joining(", ")),
           layers.stream()
             .map(
-              l -> "new org.openmaptiles.layers.%s(translations, config, stats)"
+              l -> "new org.nauticaltiles.layers.%s(translations, config, stats)"
                 .formatted(lowerUnderscoreToUpperCamel(l.layer.id)))
             .collect(joining("," + LINE_SEPARATOR))
             .indent(6).trim()
@@ -242,7 +243,7 @@ public class Generate {
     }
 
     schemaClass.append("}");
-    Files.writeString(output.resolve("OpenMapTilesSchema.java"), schemaClass);
+    Files.writeString(output.resolve("NauticalTilesSchema.java"), schemaClass);
   }
 
   private static String generateCodeForLayer(String tag, LayerConfig layer) {
@@ -309,7 +310,7 @@ public class Generate {
       /**
        * %s
        *
-       * Generated from <a href="https://github.com/openmaptiles/openmaptiles/blob/%s/layers/%s/%s.yaml">%s.yaml</a>
+       * Generated from <a href="https://github.com/JonasVgt/nautical-maplibre/blob/%s/layers/%s/%s.yaml">%s.yaml</a>
        */
       public interface %s extends Layer {
         double BUFFER_SIZE = %s;
@@ -374,7 +375,7 @@ public class Generate {
 
         /**
          * OSM element parsers generated from the <a href="https://github.com/omniscale/imposm3">imposm3</a> table definitions
-         * in the <a href="https://github.com/openmaptiles/openmaptiles/blob/%s/openmaptiles.yaml">OpenMapTiles vector tile schema</a>.
+         * in the <a href="https://github.com/JonasVgt/nautical-maplibre/blob/%s/nautical-tiles.yaml">NauticalTiles vector tile schema</a>.
          *
          * These filter and parse the raw OSM key/value attribute pairs on tags into records with fields that match the
          * columns in the tables that imposm3 would generate.  Layer implementations can "subscribe" to elements from each
@@ -704,12 +705,12 @@ public class Generate {
    * Models for deserializing yaml into:
    */
 
-  private record OpenmaptilesConfig(
-    OpenmaptilesTileSet tileset
+  private record NauticaltilesConfig(
+    NauticaltilesTileSet tileset
   ) {}
 
   @JsonIgnoreProperties(ignoreUnknown = true)
-  private record OpenmaptilesTileSet(
+  private record NauticaltilesTileSet(
     List<String> layers,
     String version,
     String attribution,
