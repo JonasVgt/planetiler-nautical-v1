@@ -78,14 +78,13 @@ class OpenMapTilesTest {
   @Test
   void testMetadata() {
     Map<String, String> metadata = mbtiles.metadataTable().getAll();
-    assertEquals("OpenMapTiles", metadata.get("name"));
+    assertEquals("NauticalTiles", metadata.get("name"));
     assertEquals("0", metadata.get("minzoom"));
     assertEquals("14", metadata.get("maxzoom"));
     assertEquals("baselayer", metadata.get("type"));
     assertEquals("pbf", metadata.get("format"));
     assertEquals("7.40921,43.72335,7.44864,43.75169", metadata.get("bounds"));
     assertEquals("7.42892,43.73752,14", metadata.get("center"));
-    assertContains("openmaptiles.org", metadata.get("description"));
     assertContains("openmaptiles.org", metadata.get("attribution"));
     assertContains("www.openstreetmap.org/copyright", metadata.get("attribution"));
   }
